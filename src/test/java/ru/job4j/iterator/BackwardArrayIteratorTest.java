@@ -51,4 +51,5 @@ class BackwardArrayIteratorTest {
         assertThatThrownBy(iterator::next)
                 .isInstanceOf(NoSuchElementException.class);
     }
+
 }
