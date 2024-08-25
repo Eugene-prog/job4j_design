@@ -22,4 +22,5 @@ public class SimpleConvert {
         return Stream.iterate(0, i -> i < example.length, i -> i + 1)
                 .collect(Collectors.toMap(i -> example[i], i -> i, (s1, s2) -> s1));
     }
+
 }
