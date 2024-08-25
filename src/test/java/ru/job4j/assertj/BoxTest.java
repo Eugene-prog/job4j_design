@@ -60,4 +60,5 @@ class BoxTest {
         int vertex = box.getNumberOfVertices();
         assertThat(vertex).isEqualTo(0);
     }
+
 }
