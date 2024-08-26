@@ -36,4 +36,5 @@ public class MatrixIterator implements Iterator<Integer> {
         }
         return data[row][column++];
     }
+
 }
