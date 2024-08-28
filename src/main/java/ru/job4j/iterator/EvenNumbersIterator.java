@@ -44,5 +44,4 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         this.index = searchIndex(data, index);
         return data[index];
     }
-
 }
