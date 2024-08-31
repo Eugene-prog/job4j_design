@@ -96,5 +96,4 @@ class MatrixIteratorTest {
         MatrixIterator iterator = new MatrixIterator(input);
         assertThat(iterator.hasNext()).isFalse();
     }
-
 }
