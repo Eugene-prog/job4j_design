@@ -14,11 +14,15 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         container = (T[]) new Object[capacity];
     }
 
+    public T[] arrayEnlargement(T[] container, int capacity) {
+        return Arrays.copyOf(container, capacity);
+    }
+
     @Override
     public void add(T value) {
         if (size == container.length) {
             int newCapacity = container.length == 0 ? DEFAULT_CAPACITY : container.length * 2;
-            container = Arrays.copyOf(container, newCapacity);
+            container = arrayEnlargement(container, newCapacity);
         }
         container[size] = value;
         size++;
