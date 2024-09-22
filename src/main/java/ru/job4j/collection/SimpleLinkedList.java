@@ -29,12 +29,10 @@ public class SimpleLinkedList<E> implements SimpleLinked<E>, Iterable<E> {
 
     @Override
     public E get(int index) {
-        int currentIndex = 0;
         Objects.checkIndex(index, size);
         Node<E> current = head;
-        while (current.next != null && (currentIndex != index)) {
+        for (int currentIndex = 0; currentIndex < index; currentIndex++) {
             current = current.next;
-            currentIndex++;
         }
         return current.item;
     }
