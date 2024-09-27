@@ -35,4 +35,5 @@ public class SimpleArraySet<T> implements SimpleSet<T> {
     public Iterator<T> iterator() {
         return set.iterator();
     }
+
 }
