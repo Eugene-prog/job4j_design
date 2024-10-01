@@ -15,14 +15,12 @@ public class NonNullIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        boolean result = false;
         if (data.length != 0 && cursor < data.length) {
             while (data[cursor] == null && cursor < data.length - 1) {
                 cursor++;
             }
-            result = data[cursor] != null;
         }
-        return result;
+        return cursor < data.length && data[cursor] != null;
     }
 
     @Override
@@ -30,9 +28,7 @@ public class NonNullIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        int nonNullNumber = data[cursor];
-        cursor++;
-        return nonNullNumber;
+        return data[cursor++];
     }
 
 }
