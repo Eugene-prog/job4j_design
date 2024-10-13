@@ -8,6 +8,8 @@ public interface Tree<E> {
 
     boolean add(E parent, E child);
 
+    boolean isBinary();
+
     Optional<Node<E>> findBy(E value);
 
     class Node<E> {

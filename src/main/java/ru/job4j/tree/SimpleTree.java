@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
@@ -23,19 +24,31 @@ public class SimpleTree<E> implements Tree<E> {
         return result;
     }
 
-    @Override
-    public Optional<Node<E>> findBy(E value) {
+    public Optional<Node<E>> findByPredicate(Predicate<Node<E>> p) {
         Optional<Node<E>> result = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> element = data.poll();
-            if (element.value.equals(value)) {
+            if (p.test(element)) {
                 result = Optional.of(element);
                 break;
             }
             data.addAll(element.children);
         }
         return result;
+    }
+
+    @Override
+    public boolean isBinary() {
+        Predicate<Node<E>> isLeafOrHasTwoChildren = element ->
+                !element.children.isEmpty() && element.children.size() != 2;
+        return findByPredicate(isLeafOrHasTwoChildren).isEmpty();
+    }
+
+    @Override
+    public Optional<Node<E>> findBy(E value) {
+        Predicate<Node<E>> valueEquals = element -> element.value.equals(value);
+        return findByPredicate(valueEquals);
     }
 }
