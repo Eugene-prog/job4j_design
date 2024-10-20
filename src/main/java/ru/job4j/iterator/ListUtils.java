@@ -38,7 +38,7 @@ public class ListUtils {
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
         for (T element : elements) {
-            removeIf(list, x -> x == element);
+            removeIf(list, x -> x.equals(element));
         }
     }
 }
