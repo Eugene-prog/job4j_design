@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConfigTest {
 
+    private final String path = "./data/invalid.properties";
+
     private void createTestFile(String filename, String content) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write(content);
@@ -34,19 +36,30 @@ class ConfigTest {
     }
 
     @Test
-    void whenInvalidKeyValueThenThrowsIllegalArgumentException() throws IOException {
-        String path = "./data/invalid.properties";
-        String[] testCases = {
-                "=value",
-                "key= ",
-                "keyvalue",
-                "="
-        };
-        for (String testCase : testCases) {
-            createTestFile(path, testCase);
-            Config config = new Config(path);
-            assertThrows(IllegalArgumentException.class, config::load);
-        }
+    void whenMissingKeyThenThrowsIllegalArgumentException() throws IOException {
+        createTestFile(path, "=value");
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
     }
 
+    @Test
+    void whenMissingValueThenThrowsIllegalArgumentException() throws IOException {
+        createTestFile(path, "key= ");
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
+    }
+
+    @Test
+    void whenMissingEqualsThenThrowsIllegalArgumentException() throws IOException {
+        createTestFile(path, "keyvalue");
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
+    }
+
+    @Test
+    void whenEmptyEntryThenThrowsIllegalArgumentException() throws IOException {
+        createTestFile(path, "=");
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
+    }
 }
