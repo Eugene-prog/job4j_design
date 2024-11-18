@@ -21,7 +21,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         if (filesMap.containsKey(fileName)) {
             FileProperty existingFileProperty = filesMap.get(fileName);
             if (currentFileProperty.equals(existingFileProperty)) {
-                System.out.println("Duplicate found: " + currentFileProperty);
                 duplicateFiles.add(currentFileProperty);
             }
         } else {
@@ -32,5 +31,12 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     public List<FileProperty> getDuplicateFiles() {
         return duplicateFiles;
+    }
+
+    public void printDuplicateFiles() {
+        if (!duplicateFiles.isEmpty()) {
+            System.out.println("Duplicate found:");
+            duplicateFiles.forEach(System.out::println);
+        }
     }
 }
