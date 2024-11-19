@@ -1,6 +1,5 @@
 package ru.job4j.io.duplicates;
 
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class FileProperty {
@@ -39,18 +38,11 @@ public class FileProperty {
             return false;
         }
         FileProperty that = (FileProperty) o;
-        String fileName = Paths.get(name).getFileName().toString();
-        String thatFileName = Paths.get(that.name).getFileName().toString();
-        return size == that.size && Objects.equals(fileName, thatFileName);
+        return size == that.size && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(size, Paths.get(name).getFileName().toString());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("FileProperty {path='%s', size=%d}", name, size);
+        return Objects.hash(size, name);
     }
 }
