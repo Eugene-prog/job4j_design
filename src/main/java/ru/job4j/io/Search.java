@@ -10,8 +10,8 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Не заданы параметры запуска");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Не верно заданы параметры запуска");
         }
         try {
             Path start = Paths.get(args[0]);
