@@ -31,19 +31,17 @@ public class ConsoleChat {
             while (running) {
                 String messageUser = in.nextLine().trim();
                 log.add(messageUser);
-                if (messageUser.equalsIgnoreCase(OUT)) {
-                    running = false;
-                    break;
-                }
-                if (messageUser.equalsIgnoreCase(STOP)) {
-                    flagAnswer = false;
-                } else if (messageUser.equalsIgnoreCase(CONTINUE)) {
-                    flagAnswer = true;
-                }
-                if (flagAnswer) {
-                    String phrase = getRandomPhrase(phrases);
-                    System.out.println(phrase);
-                    log.add(phrase);
+                switch (messageUser.toLowerCase()) {
+                    case OUT -> running = false;
+                    case STOP -> flagAnswer = false;
+                    case CONTINUE -> flagAnswer = true;
+                    default -> {
+                        if (flagAnswer) {
+                            String phrase = getRandomPhrase(phrases);
+                            System.out.println(phrase);
+                            log.add(phrase);
+                        }
+                    }
                 }
             }
         }
